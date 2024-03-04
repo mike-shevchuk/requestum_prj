@@ -1,4 +1,5 @@
 from collections import defaultdict
+from tqdm import tqdm
 
 import github_api
 
@@ -6,7 +7,7 @@ import github_api
 def get_most_similar_repos(user: str, repo: str, n: int = 5):
     contributors = github_api.get_contributors(user, repo)
     repo_contributors = defaultdict(list)
-    for c in contributors:
+    for c in tqdm(contributors):
         for r in github_api.get_user_contributions(c):
             if r != f'{user}/{repo}':
                 repo_contributors[r].append(c)

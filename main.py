@@ -4,10 +4,14 @@ import os
 
 import github_api
 import web_server
-
+from dotenv import dotenv_values
 
 def main():
-    github_api.GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+    if os.getenv('GITHUB_TOKEN'):
+        github_api.GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
+    else:
+        config = dotenv_values('.env')
+        github_api.GITHUB_TOKEN = config['GITHUB_TOKEN']
     if not github_api.GITHUB_TOKEN:
         raise ValueError('GITHUB_TOKEN environment variable is not set')
 
