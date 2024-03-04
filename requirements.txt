@@ -1,0 +1,5 @@
+pip==23.0.1
+requests==2.31.0
+setuptools==58.1.0
+tqdm==4.66.2
+wheel==0.42.0
